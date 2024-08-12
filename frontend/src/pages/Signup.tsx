@@ -1,7 +1,5 @@
-import { useState } from "react";
 import Auth from "../components/Auth";
 import Quote from "../components/Quote";
-import AnimatedRight from "../components/AnimatedRight";
 import Animated from "../components/Animated";
 
 export default function Signup(){
