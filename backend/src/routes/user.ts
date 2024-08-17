@@ -65,6 +65,8 @@ userRouter.post('/signup', async(c) => {
       return c.text("invalid signin")
       }
       const jwt = await sign({id:user.id},c.env.JWT_SECRET)
+      const iddd = user.id;
+      console.log(iddd);
       return c.text(jwt)
     }catch(e){
       c.status(411);

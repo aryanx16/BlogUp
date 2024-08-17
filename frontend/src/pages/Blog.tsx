@@ -7,8 +7,13 @@ import Appbar from "../components/Appbar";
 export default function Blog() {
     const { id } = useParams();
     console.log(id);
-    const { loading, blog } = useBlog({ id: id || "" });
-    // console.log(blog);
+    const { loading, blog ,userId } = useBlog({ id: id || "" });
+
+    console.log("=============================================")
+    console.log(userId);
+    console.log("=============================================")
+    console.log(blog?.authorId);
+    console.log("=============================================")
     if (loading) {
         return (
             <>
@@ -25,7 +30,7 @@ export default function Blog() {
     return (
         <>
 
-            <FullBlog blog={blog} />
+            <FullBlog  userId={userId?userId:-1} blog={blog} />
 
         </>
     )

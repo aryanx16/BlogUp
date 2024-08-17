@@ -5,6 +5,7 @@ export interface Blogtypes{
     "content" : string,
     "title": string,
      "id":number,
+     "authorId":number,
      "author":{
         "name":string,
      }
@@ -32,6 +33,7 @@ export const  useBlogs=()=>{
 export const useBlog=({id}:{id:string})=>{
 
     const [loading,setloading] = useState(true);
+    const [userId ,setuserId] = useState();
     const [blog,setblog] = useState<Blogtypes>()
     useEffect(()=>{
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
@@ -41,12 +43,14 @@ export const useBlog=({id}:{id:string})=>{
         })
         .then(response=>{
             setblog(response.data.blog)
+            setuserId(response.data.userId)
             console.log(response)
             setloading(false)
         })
     },[])
     return{
         loading,
-        blog
+        blog,
+        userId
     }
 }
