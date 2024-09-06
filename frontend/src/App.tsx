@@ -8,6 +8,7 @@ import CreatePost from './pages/CreatePost'
 import Edit from './pages/Edit'
 import Profile from './pages/Profile'
 import { ToastContainer } from 'react-toastify'
+import Home from './pages/Home'
 
 
 
@@ -24,7 +25,7 @@ function App() {
       <Route path='/publish' element={<CreatePost/>}/>
       <Route path='/edit/:id' element={<Edit/>}/>
       <Route path='/profile/:id' element={<Profile/>}/>
-      
+      <Route path='/' element={<Home/>}/>
     </Routes>
     </BrowserRouter>
       <ToastContainer />
