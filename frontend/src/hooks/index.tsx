@@ -6,8 +6,10 @@ export interface Blogtypes{
     "title": string,
      "id":number,
      "authorId":number,
+     "createdAt":string,
      "author":{
         "name":string,
+        "id":number,
      }
 }
 
@@ -22,9 +24,12 @@ export const  useBlogs=()=>{
             }
         }).then(response=>{
             setblogs(response.data.blogs)
+            console.log(response.data.blogs)
             setloading(false)
+
         })
     },[])
+    
     return{
         loading,
         blogs
@@ -36,7 +41,7 @@ export const useBlog=({id}:{id:string})=>{
     const [userId ,setuserId] = useState();
     const [blog,setblog] = useState<Blogtypes>()
     useEffect(()=>{
-        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
+        axios.get(`${BACKEND_URL}/api/v1/blog/mid/${id}`,{
             headers:{
                 Authorization: localStorage.getItem("token")
             }
@@ -44,7 +49,9 @@ export const useBlog=({id}:{id:string})=>{
         .then(response=>{
             setblog(response.data.blog)
             setuserId(response.data.userId)
-            console.log(response)
+            console.log("++++++=======++++++++++")
+            console.log(response.data)
+            console.log("++++++=======++++++++++")
             setloading(false)
         })
     },[])

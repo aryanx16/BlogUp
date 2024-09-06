@@ -6,6 +6,11 @@ import Blogs from './pages/Blogs'
 import Blog from './pages/Blog'
 import CreatePost from './pages/CreatePost'
 import Edit from './pages/Edit'
+import Profile from './pages/Profile'
+import { ToastContainer } from 'react-toastify'
+
+
+
 
 function App() {
   return (
@@ -18,8 +23,11 @@ function App() {
       <Route path='/blog/:id' element={<Blog/>}/>
       <Route path='/publish' element={<CreatePost/>}/>
       <Route path='/edit/:id' element={<Edit/>}/>
+      <Route path='/profile/:id' element={<Profile/>}/>
+      
     </Routes>
     </BrowserRouter>
+      <ToastContainer />
     </>
   )
 }

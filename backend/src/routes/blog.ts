@@ -13,11 +13,12 @@ export const blogRouter = new Hono<{
   }
 }>()
 
-blogRouter.use("/*", async (c, next) => {
+blogRouter.use("/mid/*", async (c, next) => {
   const authheader = c.req.header("authorization") || ""
   try {
 
     const user = await verify(authheader, c.env.JWT_SECRET)
+    console.log("===============******************************************************************************")
     console.log(user)
     if (user) {
       //@ts-ignore
@@ -33,11 +34,42 @@ blogRouter.use("/*", async (c, next) => {
   } catch (e) {
     console.log(e);
     return c.json({
-      error:"you are not logged in "
+      error:"you are not logged in  catch"
     })
   }
 })
-blogRouter.post('/', async (c) => {
+blogRouter.delete("/:id",async(c)=>{
+  try{
+
+    const id = c.req.param('id')
+
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+    const post = await prisma.blog.findFirst({
+      where:{
+        id:Number(id)
+      }
+    })
+
+    if(!post){
+      return c.text("post not present")
+    }
+    console.log("post is present and deleting...")
+    const deleltedPost = await prisma.blog.delete({
+      where:{
+        id:Number(id)
+      }
+    })
+    console.log(deleltedPost);
+    return c.text("dlelted")
+  }catch(e){
+    console.log(e);
+    return c.text("error while deleting post")
+  }
+})
+
+blogRouter.post('/mid/', async (c) => {
   const body = await c.req.json();
   const {success} = createBlogInput.safeParse(body);
     if(!success){
@@ -64,13 +96,15 @@ blogRouter.post('/', async (c) => {
 })
 blogRouter.put('/', async (c) => {
   const body = await c.req.json();
+  // console.log(body);
   const {success} = updateBlogInput.safeParse(body);
-    if(!success){
-      c.status(411);
-      return c.json({
-        error:"inputs are not correct while updating post "
-      })
-    }
+  console.log(success);
+    // if(!success){
+    //   c.status(411);
+    //   return c.json({
+    //     error:"inputs are not correct while updating post "
+    //   })
+    // }
   // const id = c.req.param('id');
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -86,16 +120,16 @@ blogRouter.put('/', async (c) => {
       authorId: Number(authorId)
     }
   })
-  return c.text('Hello Hono!')
+  return c.text('changes updated!')
 })
 
 
 blogRouter.get('/bulk', async (c) => {
-  console.log("--------------------------------------------------")
+  // console.log("--------------------------------------------------")
   try{
 
-    const body =  c.req.json();
-    const id = c.req.param('id');
+    // const body =  c.req.json();
+    // const id = c.req.param('id');
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
@@ -104,9 +138,13 @@ blogRouter.get('/bulk', async (c) => {
         content:true,
         title:true,
         id:true,
+        authorId:true,
+        createdAt:true,
         author:{
           select:{
             name:true,
+            id:true,
+
           }
         }
       }
@@ -126,7 +164,7 @@ blogRouter.get('/bulk', async (c) => {
 })
 
 
-blogRouter.get('/:id', async (c) => {
+blogRouter.get('/mid/:id', async (c) => {
   try {
 
     // const body = await c.req.json();
@@ -134,9 +172,9 @@ blogRouter.get('/:id', async (c) => {
     const id = parseInt(c.req.param("id"));
     const userId = c.get("userId");
     console.log("------------------------------------")
-    console.log("userid ")
+    console.log("userid")
     console.log(userId);
-    console.log("------------------------------------")
+    // console.log("------------------------------------")
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
@@ -149,6 +187,7 @@ blogRouter.get('/:id', async (c) => {
         title:true,
         content:true,
         authorId:true,
+        createdAt:true,
         author:{
           select:{
             name:true
@@ -156,7 +195,9 @@ blogRouter.get('/:id', async (c) => {
         }
       }
     })
-    console.log("authorId")
+    console.log("authorId at fullblog : ")
+    console.log(userId)
+    console.log(blog?.authorId)
     console.log(userId==blog?.authorId)
     return c.json({
       blog,
