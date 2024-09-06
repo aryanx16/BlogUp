@@ -64,7 +64,7 @@ export default function Blogs() {
                 +
             </div> */}
             <Link to={"/publish"}>
-            <div className="sm:hidden fixed justify-center items-center  shadow-black p-3 bottom-8 right-3 text-4xl rounded-full bg-white border shadow-sm dark:bg-white dark:text-black">
+            <div className="sm:hidden fixed justify-center items-center  shadow-black p-3 bottom-8 right-3 text-4xl rounded-full bg-white border  dark:bg-white dark:text-black">
             <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="28" height="28" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </div>
             </Link>

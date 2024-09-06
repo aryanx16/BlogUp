@@ -110,7 +110,7 @@ export default function Auth({ type }: { type: "signup" | "signin" }) {
 
             <button
               type="submit"
-              className="w-full text-base font-bold text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg px-5 py-2.5 me-2 mb-2"
+              className="w-full text-base mt-2 font-bold text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg px-5 py-2.5 me-2 mb-2"
             >
               {type === "signup" ? "Sign up" : "Sign in"}
             </button>

@@ -44,7 +44,7 @@ export default function CreatePost() {
         <Appbar />
         <div className="flex flex-col pt-28 p-8 dark:text-white items-center w-full h-screen gap-2 dark:bg-blu ">
         
-            <div className="text-4xl font-bold">New Post</div>
+            <div className="text-4xl font-bold drop-shadow-custom">New Post</div>
             <div className="max-w-screen-lg w-full">
                 <label htmlFor="title" className="mx-2 font-semibold text-xl">Title</label>
                 <textarea onChange={(e)=>setTitle(e.target.value)} className="mb-3 dark:border-white  dark:text-black border-2 border-black rounded-md w-full" name="title" placeholder=" Title" id="title"></textarea>

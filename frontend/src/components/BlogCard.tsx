@@ -61,7 +61,7 @@ export default function BlogCard({
     return (
         <>
             {/* <div className="font-nunito border-b mb-2 pb-1 cursor-pointer " > */}
-            <div className="overflow-hidden font-nunito border px-8 sm:px-14 shadow-md rounded-md dark:shadow-xl dark:shadow-black dark:border dark:border-slate-950  py-2 mb-2 dark:mb-6 pb-1 cursor-pointer " >
+            <div className="overflow-hidden font-nunito border px-8 sm:px-14 shadow-md rounded-md  dark:border-2 dark:shadow-black dark:shadow-2xl dark:border-slate-900  py-2 mb-2 dark:mb-6 pb-1 cursor-pointer " >
                 <div className="flex items-center">
                     <div className="font-normal text-lg dark:text-white m-1"><Link to={`/profile/${authorid}`}> <Avatar name={authorname} size={8} />  {authorname.slice(0,8)}</Link></div>
                     <div className="flex justify-center flex-col pl-1 pr-2"> <Circle /></div>
