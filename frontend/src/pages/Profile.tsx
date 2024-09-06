@@ -25,7 +25,7 @@ interface userposts {
 export default function () {
     const [user, setuser] = useState<User>()
     const [userposts, setuserposts] = useState<userposts[]>([])
-    const [theme, setTheme] = useState('dark');
+    const [theme] = useState('dark');
     const [userid, setuserid] = useState();
     const  navigate = useNavigate();
     useEffect(() => {
